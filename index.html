@@ -1,0 +1,1222 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ярославцев Александр — портфолио</title>
+  <meta name="description" content="Руководитель проектов и дизайнер интерфейсов в медицине. 5 лет в дизайне, 3 года в аналитике и управлении проектами.">
+
+  <style>
+    /* ================================================
+       ШРИФТ: Geist от Vercel (переменный, 100–900)
+       ================================================ */
+    @font-face {
+      font-family: 'Geist';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/geist@1.4.1/dist/fonts/geist-sans/Geist-Variable.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Geist Fallback';
+      src: local(Arial);
+      ascent-override: 95.94%;
+      descent-override: 28.16%;
+      line-gap-override: 0%;
+      size-adjust: 104.76%;
+    }
+
+    /* ================================================
+       CSS-ПЕРЕМЕННЫЕ: СВЕТЛАЯ ТЕМА (по умолчанию)
+       ================================================ */
+    :root {
+      /* Фон — тёплый почти-белый */
+      --background: hsl(60, 20%, 99.02%);
+      /* Текст — почти чёрный */
+      --primary: hsl(0, 0%, 6.67%);
+
+      /* Альфа-версии текстового цвета для второстепенных элементов */
+      --primary-5:  hsl(0, 0%, 6.67%, 0.05);
+      --primary-10: hsl(0, 0%, 6.67%, 0.10);
+      --primary-20: hsl(0, 0%, 6.67%, 0.20);
+      --primary-40: hsl(0, 0%, 6.67%, 0.40);
+      --primary-80: hsl(0, 0%, 6.67%, 0.80);
+      --primary-90: hsl(0, 0%, 6.67%, 0.90);
+
+      --radius: 0.75rem;
+    }
+
+    /* ================================================
+       CSS-ПЕРЕМЕННЫЕ: ТЁМНАЯ ТЕМА
+       ================================================ */
+    .dark {
+      --background: hsl(0, 0%, 6.67%);
+      --primary: hsl(60, 20%, 99.02%);
+
+      --primary-5:  hsl(60, 20%, 99.02%, 0.05);
+      --primary-10: hsl(60, 20%, 99.02%, 0.10);
+      --primary-20: hsl(60, 20%, 99.02%, 0.20);
+      --primary-40: hsl(60, 20%, 99.02%, 0.40);
+      --primary-80: hsl(60, 20%, 99.02%, 0.80);
+      --primary-90: hsl(60, 20%, 99.02%, 0.90);
+    }
+
+    /* ================================================
+       СБРОС СТИЛЕЙ (аналог Tailwind preflight)
+       ================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      border: 0 solid var(--primary-10);
+      margin: 0;
+      padding: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--primary-20);
+      outline-offset: 2px;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-40) transparent;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Geist', 'Geist Fallback', system-ui, -apple-system, sans-serif;
+      background-color: var(--background);
+      color: var(--primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
+
+    /* Цвет выделения текста */
+    ::selection {
+      background: var(--primary-80);
+      color: var(--background);
+    }
+
+    a   { color: inherit; text-decoration: inherit; }
+    img, video { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+    svg { display: block; }
+
+    /* ================================================
+       ГЛАВНЫЙ КОНТЕЙНЕР СТРАНИЦЫ
+       ================================================ */
+    .page {
+      min-height: 100vh;
+      background-color: var(--background);
+      color: var(--primary);
+    }
+
+    /* Двухколоночный лэйаут: мобиле — стопка, десктоп — строка */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      gap: 2.5rem;            /* gap-10 */
+      padding: 2rem 1.5rem;   /* py-8 px-6 */
+    }
+
+    @media (min-width: 1024px) {
+      .main {
+        flex-direction: row;
+        gap: 5rem;             /* lg:gap-20 */
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 2rem;       /* lg:py-0 lg:px-8 */
+      }
+    }
+
+    /* ================================================
+       ЛЕВАЯ КОЛОНКА: биография, проекты, контакты
+       ================================================ */
+
+    .sidebar {
+      width: 100%;
+      max-width: 28rem;    /* max-w-md */
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;           /* gap-8 */
+    }
+
+    @media (min-width: 1024px) {
+      .sidebar {
+        position: sticky;
+        top: 0;
+        width: 300px;
+        max-width: 300px;   /* lg:w-[300px] lg:max-w-[300px] */
+        flex: none;
+        align-items: flex-start;
+        align-self: flex-start;
+        padding-bottom: 60px; /* lg:pb-[60px] */
+        padding-top: 2rem;    /* lg:pt-8 */
+      }
+    }
+
+    /* Обёртка содержимого сайдбара (позиционирование кнопки темы) */
+    .sidebar-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    /* --------- Аватар --------- */
+
+    /* Контейнер аватара с маской */
+    .avatar-wrap {
+      position: relative;
+      width: 298px;
+      height: 338px;       /* мобиле: удвоенный размер */
+      align-self: center;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    @media (min-width: 1024px) {
+      .avatar-wrap {
+        width: 149px;
+        height: 169px;     /* десктоп: оригинальный размер */
+        align-self: flex-start;
+      }
+    }
+
+    /* Тёмная версия аватара — поверх светлой, изначально прозрачна */
+    .avatar-dark {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0;
+    }
+
+    /* В тёмной теме — непрозрачна */
+    .dark .avatar-dark {
+      opacity: 1;
+    }
+
+    /* Переход аватара только при явном переключении (не при загрузке) */
+    html.theme-animating .avatar-dark {
+      transition: opacity 0.6s ease;
+    }
+
+    /* Переход фона страницы с той же длительностью */
+    html.theme-animating body,
+    html.theme-animating .page {
+      transition: background-color 0.6s ease;
+    }
+
+    /* Серая заглушка вместо реального фото/видео */
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--primary-40);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      /* Вставьте своё фото/видео вместо этой заглушки */
+    }
+
+    .avatar-placeholder svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* --------- Разделы с информацией --------- */
+
+    .bio-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;   /* gap-6 */
+    }
+
+    /* Один раздел: метка + контент */
+    .bio-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;   /* space-y-2 */
+    }
+
+    .bio-section--projects {
+      gap: 0.75rem;  /* space-y-3 */
+    }
+
+    /* Маленький серый заголовок раздела */
+    .section-label {
+      font-size: 0.75rem;        /* text-xs */
+      font-weight: 500;          /* font-medium */
+      letter-spacing: -0.01em;  /* tracking-[-0.01em] */
+      color: var(--primary-40); /* text-primary-40 */
+      line-height: 140%;
+    }
+
+    /* Основной текст раздела */
+    .section-text {
+      font-size: 0.875rem;      /* text-sm */
+      font-weight: 400;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      color: var(--primary);
+    }
+
+    /* --------- Список ссылок на проекты --------- */
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Строка проекта: иконка + текст */
+    .project-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;               /* gap-4 */
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 0;
+      transition: opacity 0.1s ease-out;
+      outline: none;
+    }
+
+    .project-item:hover    { opacity: 0.8; }
+    .project-item:focus-visible { box-shadow: 0 0 0 3px var(--primary-20); }
+
+    /* Иконка приложения (32×32, заглушка) */
+    .project-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: var(--primary-10);
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      /* Задайте background-image с иконкой вашего проекта */
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .project-name {
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      color: var(--primary);
+    }
+
+    .project-meta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      color: var(--primary-40);
+    }
+
+    /* --------- Кнопка «Контакты» --------- */
+
+    .contact-btn {
+      position: relative;
+      width: 100%;
+      align-self: stretch;
+      height: 40px;
+      margin-top: 0.5rem;       /* mt-2 */
+      border-radius: 10px;
+      background-color: var(--primary);
+      color: var(--background);
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      transition: background-color 0.1s ease-out;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    .contact-btn:hover { background-color: var(--primary-80); }
+
+    /* Подсказка клавиши C (видна только на десктопе) */
+    .contact-btn kbd {
+      display: none;
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom-width: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: sans-serif;
+    }
+
+    @media (min-width: 1024px) {
+      .contact-btn kbd { display: flex; }
+    }
+
+    /* --------- Кнопка переключения тёмной/светлой темы --------- */
+
+    .theme-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 40;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1px solid var(--primary-10);
+      background-color: var(--background);
+      color: var(--primary);
+      touch-action: manipulation;
+      /* Плавная смена всех свойств */
+      transition: transform 0.1s ease,
+                  background-color 0.1s ease,
+                  color 0.1s ease,
+                  border-color 0.1s ease;
+    }
+
+    .theme-toggle:hover  { background-color: var(--primary-5); }
+    .theme-toggle:active { transform: scale(0.98); }
+
+    .theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+    }
+
+    /* ================================================
+       ПРАВАЯ КОЛОНКА: портфолио-работы
+       ================================================ */
+
+    .portfolio {
+      width: 100%;
+      max-width: 28rem;
+      flex: 1;
+    }
+
+    @media (min-width: 1024px) {
+      .portfolio {
+        width: 600px;
+        max-width: 600px;    /* lg:w-[600px] lg:max-w-[600px] */
+        flex: none;
+        padding-top: 2rem;   /* lg:pt-8 */
+        padding-bottom: 2rem;
+      }
+    }
+
+    /* Сетка карточек без gap — разделитель делаем линией */
+    .portfolio-grid {
+      display: grid;
+      gap: 0;
+    }
+
+    /* Линия-разделитель между проектами с отступами по 3rem */
+    .portfolio-card + .portfolio-card {
+      border-top: 1px solid var(--primary-10);
+      padding-top: 3rem;
+      margin-top: 3rem;
+    }
+
+    /* --------- Карточка портфолио --------- */
+
+    /* Карточка: нет обводки и фона, только скруглённые углы для изображения */
+    .portfolio-card {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Всегда столбец: картинка сверху, текст снизу */
+    .portfolio-card-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* --------- Область медиа --------- */
+
+    /* Полная ширина, квадрат, скруглённые углы */
+    .portfolio-media {
+      background-color: var(--primary-10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--primary-20);
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      min-height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* Когда внутри реальная картинка — убираем серый фон и фиксированный квадрат */
+    .portfolio-media:has(img) {
+      background-color: transparent;
+      aspect-ratio: auto;
+      min-height: unset;
+      height: auto;
+    }
+
+    /* Картинка занимает всю ширину, высота пропорциональна */
+    .portfolio-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Иконка-заглушка внутри области медиа */
+    .media-icon {
+      width: 28px;
+      height: 28px;
+      opacity: 0.35;
+      flex-shrink: 0;
+    }
+
+    /* Подпись под иконкой */
+    .media-hint {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-align: center;
+      padding: 0 1rem;
+      /* Замените эту заглушку на тег <img> или <video> */
+    }
+
+    /* --------- История продукта (название, проблема, решение) --------- */
+
+    .portfolio-story {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    /* Название продукта */
+    .product-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 140%;
+      color: var(--primary);
+      /* Замените на реальное название продукта */
+    }
+
+    /* Внутренний разделитель скрыт — линия теперь между проектами */
+    .story-divider {
+      display: none;
+    }
+
+    /* Блок «Проблема» или «Решение» */
+    .story-section {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    /* Метка: «Проблема» / «Решение» */
+    .story-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 140%;
+      color: var(--primary-40);
+    }
+
+    /* Текст описания */
+    .story-text {
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      color: var(--primary);
+      /* Замените на реальный текст */
+    }
+
+    /* --------- Чипсы ролей (Дизайнер, Тимлид, Аналитик) --------- */
+
+    .role-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    /* Один чипс с ролью */
+    .chip {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid var(--primary-10);
+      color: var(--primary-40);
+      white-space: nowrap;
+      line-height: 1.6;
+    }
+
+    /* Ссылка «Смотреть проект →» в нижней части истории */
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--primary-40);
+      text-decoration: none;
+      margin-top: auto;
+      padding-top: 4px;
+      transition: color 0.1s ease;
+    }
+
+    .project-link:hover { color: var(--primary); }
+
+    /* Блок заголовка карточки: название + чипсы */
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* ================================================
+       ДИАЛОГ «КОНТАКТЫ»
+       ================================================ */
+
+    /* Затемнение фона */
+    .dialog-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Скрыт по умолчанию */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .dialog-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Само окно диалога */
+    .dialog {
+      background-color: var(--background);
+      color: var(--primary);
+      border-radius: 20px;        /* rounded-[20px] */
+      padding: 1rem 0.75rem 0.75rem;  /* pt-4 px-3 pb-3 */
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;                /* gap-2 */
+      width: 300px;
+      max-width: calc(100% - 64px);  /* max-w-[calc(100%-64px)] */
+      /* Масштабирование при открытии */
+      transform: scale(0.95);
+      transition: transform 0.15s ease;
+    }
+
+    .dialog-overlay.open .dialog {
+      transform: scale(1);
+    }
+
+    /* Заголовок диалога */
+    .dialog-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--primary-40);
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* Список вариантов для связи */
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Одна строка контакта */
+    .contact-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;             /* gap-4 */
+      border-radius: 8px;
+      padding: 9px 0.5rem 7px;  /* px-2 pt-[9px] pb-[7px] */
+      transition: background-color 0.1s ease;
+      outline: none;
+    }
+
+    .contact-option:hover         { background-color: var(--primary-5); }
+    .contact-option:focus-visible { box-shadow: 0 0 0 3px var(--primary-20); }
+
+    /* Иконка контакта */
+    .contact-option-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: var(--primary-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-option-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-option-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Название сервиса (Email, Telegram…) */
+    .contact-option-label {
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+    }
+
+    /* Конкретный адрес/ник */
+    .contact-option-value {
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.01em;
+      color: var(--primary-40);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Кнопка «Закрыть» */
+    .dialog-close {
+      width: 100%;
+      height: 40px;
+      margin-top: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid var(--primary-10);
+      background-color: transparent;
+      color: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: background-color 0.1s ease;
+    }
+
+    .dialog-close:hover { background-color: var(--primary-5); }
+  </style>
+</head>
+<body>
+
+  <!--
+    Инициализация темы из localStorage ДО рендера страницы,
+    чтобы избежать мигания (flash of wrong theme).
+  -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme') || 'system';
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (saved === 'system' && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <div class="page">
+    <main class="main">
+
+      <!-- ============================================================
+           ЛЕВАЯ КОЛОНКА: аватар, имя, опыт, проекты, кнопка контактов
+           ============================================================ -->
+      <section class="sidebar" aria-label="Информация об авторе">
+        <div class="sidebar-inner">
+
+          <!-- Кнопка переключения тёмной/светлой темы -->
+          <button
+            class="theme-toggle"
+            type="button"
+            onclick="toggleTheme()"
+            aria-label="Переключить тему"
+          >
+            <!-- Солнце — отображается в тёмной теме -->
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <line x1="12" y1="2" x2="12" y2="4"/>
+              <line x1="12" y1="20" x2="12" y2="22"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="2" y1="12" x2="4" y2="12"/>
+              <line x1="20" y1="12" x2="22" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Луна — отображается в светлой теме -->
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 style="display:none">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <!-- ── Аватар ──────────────────────────────────────────── -->
+          <!--
+            Замените содержимое .avatar-wrap на свой тег <img> или <video>.
+            Пример:
+              <img src="ваше-фото.webp" alt="Ваше имя" style="width:100%;height:100%;object-fit:cover">
+          -->
+          <div class="avatar-wrap">
+            <!-- Светлая версия — основа -->
+            <img
+              src="images/avatar.jpg"
+              alt="Фото"
+              style="width:100%;height:100%;object-fit:cover;object-position:top center"
+            >
+            <!-- Тёмная версия — накладывается поверх при смене темы -->
+            <img
+              class="avatar-dark"
+              src="images/avatar-dark.png"
+              alt="Фото (тёмная тема)"
+            >
+          </div>
+
+          <!-- ── Информационные блоки ──────────────────────────── -->
+          <div class="bio-sections">
+
+            <!-- Имя + краткое описание -->
+            <div class="bio-section">
+              <p class="section-label">Ярославцев Александр</p>
+              <h1 class="section-text">
+                Руковожу проектами и проектирую интерфейсы в медицине. Превращаю сложные процессы в простые продукты.
+              </h1>
+            </div>
+
+            <!-- Текущий опыт / место работы -->
+            <div class="bio-section">
+              <p class="section-label">Опыт</p>
+              <p class="section-text">
+                5 лет в дизайне, 3 года в аналитике и управлении проектами, 1 год в ML. Работаю в медицинской компании — веду продукты от идеи до релиза. Профессионально собираю мебель IKEA. Чемпион по игре в крокодила.
+              </p>
+            </div>
+
+
+            <!-- Кнопка открытия диалога контактов (горячая клавиша C) -->
+            <button
+              class="contact-btn"
+              type="button"
+              onclick="openDialog()"
+              aria-haspopup="dialog"
+              aria-controls="contact-dialog"
+            >
+              Контакты
+            </button>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ПРАВАЯ КОЛОНКА: карточки портфолио
+           Каждая карточка = заглушка медиа (слева) + история продукта (справа)
+           ============================================================ -->
+      <section class="portfolio" aria-label="Портфолио">
+        <div class="portfolio-grid">
+
+          <!--
+            Скриншоты лежат в папке images/ рядом с index.html.
+            Чтобы добавить картинку — замените .portfolio-media на:
+              <img src="images/имя-файла.jpg" alt="..." style="width:100%;height:100%;object-fit:cover;object-position:top">
+          -->
+
+          <!-- ══ 1. ОНЛАЙН-ЗАПИСЬ НА ПРИЁМ ══════════════════════════ -->
+          <!-- Скриншот → images/online-zapis.jpg -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/online-zapis.png" alt="Онлайн-запись на приём">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Онлайн-запись на приём</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                    <span class="chip">Тимлид</span>
+                    <span class="chip">Аналитик</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">Контакт-центр был перегружен — максимальное время ожидания ответа на звонке достигало 40 минут.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Онлайн-запись на сайте 41 больницы перевела 30% пациентов в цифровой канал. Максимальное время ожидания на звонке сократилось до 15 минут.</p>
+                </div>
+                <a class="project-link" href="https://gb41.org/widget/index.html" target="_blank" rel="noopener noreferrer">
+                  Смотреть проект →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 2. ЛИЧНЫЙ КАБИНЕТ ПАЦИЕНТА ══════════════════════════ -->
+          <!-- Скриншот → images/lichniy-kabinet.jpg -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/lichniy-kabinet.png" alt="Личный кабинет пациента">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Личный кабинет пациента</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                    <span class="chip">Тимлид</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">По закону о персональных данных (сентябрь 2025) клиники не могут отправлять результаты анализов на почту — штраф до 1,5 млн ₽. Пациентам приходилось приезжать в клинику лично.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Личный кабинет для ММЦ СОГАЗ: пациенты подписывают согласие онлайн и получают результаты анализов и приёмов прямо в телефоне, а также записываются на следующие приёмы.</p>
+                </div>
+                <a class="project-link" href="https://lk.groupmmc.ru/" target="_blank" rel="noopener noreferrer">
+                  Смотреть проект →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 3. КИОСК САМООБСЛУЖИВАНИЯ ══════════════════════════ -->
+          <!-- Скриншот → images/kiosk.jpg -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/kiosk.png" alt="Киоск самообслуживания">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Киоск самообслуживания пациента</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                    <span class="chip">Аналитик</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">В час пик на регистратуре скапливалась очередь пациентов с ожиданием до 20 минут, что вызывало раздражение и складывало плохое впечатление о клинике.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Киоск самообслуживания пациентов в клинике УГМК-Здоровье позволил оплачивать приёмы и печатать талоны без ожидания в очереди. Благодаря этому ожидание снизилось до 5 минут.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 4. МОБИЛЬНОЕ ПРИЛОЖЕНИЕ ДЛЯ ВРАЧЕЙ ══════════════════ -->
+          <!-- Скриншот → images/mobile-vrach.jpg -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/mobile-vrach.png" alt="Мобильное приложение для врачей скорой">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Мобильное приложение для врачей скорой помощи</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">Врачам скорой помощи приходилось приезжать на вызов, заполнять протокол на бумаге, возвращаться в клинику и перепечатывать текст в медицинскую систему.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Мобильное приложение позволило прямо на выезде заполнить протокол со своего телефона и отправить напрямую в медицинскую систему.</p>
+                </div>
+                <a class="project-link" href="https://www.rustore.ru/catalog/app/ru.e2m.app" target="_blank" rel="noopener noreferrer">
+                  Смотреть в RuStore →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 5. УМНЫЙ АССИСТЕНТ ВРАЧА ══════════════════════════ -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/assistant.png" alt="Умный ассистент врача">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Умный ассистент врача</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                    <span class="chip">Тимлид</span>
+                    <span class="chip">Аналитик</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">Врач во время приёма полагается только на свои знания и может забыть спросить у пациента важную информацию или назначить неправильное лечение.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Умный ассистент врача с комплексом помощников для снижения риска ошибок и помощи в написании протокола во время приёма.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 6. САЙТ ООО «ВИСМУТ» ══════════════════════════════ -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/vismuth.png" alt="Сайт ООО «ВИСМУТ»">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Сайт ООО «ВИСМУТ»</h3>
+                  <div class="role-chips">
+                    <span class="chip">Дизайнер</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">У компании был ряд продуктов, о которых клиенты узнавали только в результате холодных звонков.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Сайт компании, благодаря которому клиенты могут ознакомиться с продуктами и оставить свою заявку.</p>
+                </div>
+                <a class="project-link" href="https://vismuth.ru/" target="_blank" rel="noopener noreferrer">
+                  Смотреть сайт →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ 7. СИСТЕМА МОНИТОРИНГА ЦЕН ══════════════════════════ -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <img src="images/monitoring.png" alt="Система мониторинга цен">
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Система мониторинга цен на услуги в клиниках</h3>
+                  <div class="role-chips">
+                    <span class="chip">Аналитик</span>
+                    <span class="chip">ML-разработчик</span>
+                  </div>
+                </div>
+                <div class="story-divider"></div>
+                <div class="story-section">
+                  <p class="story-label">Проблема</p>
+                  <p class="story-text">Клиники не хотят продешевить с ценой на свои услуги, поэтому им приходилось составлять Excel-таблицы с тысячами услуг в разных клиниках — на это уходила занятость одного сотрудника в месяц.</p>
+                </div>
+                <div class="story-section">
+                  <p class="story-label">Решение</p>
+                  <p class="story-text">Система автоматически парсит цены с сайтов, сопоставляет услуги в разных клиниках и на базе Apache Superset с анализом GigaChat выводит рекомендации по изменению цен.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============================================================
+       ДИАЛОГ «КОНТАКТЫ»
+       (открывается кнопкой «Контакты» или клавишей C)
+       ============================================================ -->
+  <div
+    class="dialog-overlay"
+    id="contact-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Контакты"
+    onclick="closeDialogOnOverlay(event)"
+  >
+    <div class="dialog">
+      <p class="dialog-label">Контакты</p>
+
+      <div class="contact-options">
+
+        <!-- Телефон -->
+        <a class="contact-option" href="tel:89530063570">
+          <div class="contact-option-icon">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.8 19.8 0 0 1 1 3.41 2 2 0 0 1 2.97 1h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/>
+            </svg>
+          </div>
+          <div class="contact-option-info">
+            <span class="contact-option-label">Телефон</span>
+            <span class="contact-option-value">8 953 006 35 70</span>
+          </div>
+        </a>
+
+        <!-- Telegram -->
+        <a class="contact-option"
+           href="https://t.me/AlexandrYaroslavtsev"
+           target="_blank"
+           rel="noopener noreferrer">
+          <div class="contact-option-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.89 8.22-1.97 9.28c-.15.66-.54.82-1.08.51l-3-2.21-1.45 1.39c-.16.16-.3.3-.6.3l.21-3.05 5.56-5.02c.24-.21-.05-.33-.37-.12L7.17 13.85l-2.96-.92c-.64-.2-.65-.64.14-.95l11.57-4.46c.54-.19 1.01.13.97.7z"/>
+            </svg>
+          </div>
+          <div class="contact-option-info">
+            <span class="contact-option-label">Telegram</span>
+            <span class="contact-option-value">@AlexandrYaroslavtsev</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Кнопка закрытия диалога -->
+      <button class="dialog-close" type="button" onclick="closeDialog()">
+        Закрыть
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT: тема, диалог, горячие клавиши
+       ============================================================ -->
+  <script>
+    /* ── Переключение тёмной/светлой темы ── */
+
+    function updateThemeIcons() {
+      var isDark = document.documentElement.classList.contains('dark');
+      // Солнце видно в тёмной теме, луна — в светлой
+      document.getElementById('icon-sun').style.display  = isDark ? 'block' : 'none';
+      document.getElementById('icon-moon').style.display = isDark ? 'none'  : 'block';
+      document.querySelector('.theme-toggle').setAttribute(
+        'aria-label',
+        isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'
+      );
+    }
+
+    function toggleTheme() {
+      var DURATION = 600; /* мс — совпадает с длительностью CSS-перехода */
+      document.documentElement.classList.add('theme-animating');
+      var isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcons();
+      setTimeout(function () {
+        document.documentElement.classList.remove('theme-animating');
+      }, DURATION);
+    }
+
+    /* ── Диалог контактов ── */
+
+    function openDialog() {
+      var d = document.getElementById('contact-dialog');
+      d.classList.add('open');
+      document.body.style.overflow = 'hidden'; // блокируем прокрутку фона
+      document.querySelector('.contact-btn').setAttribute('aria-expanded', 'true');
+    }
+
+    function closeDialog() {
+      var d = document.getElementById('contact-dialog');
+      d.classList.remove('open');
+      document.body.style.overflow = '';
+      document.querySelector('.contact-btn').setAttribute('aria-expanded', 'false');
+    }
+
+    // Закрытие по клику на тёмный оверлей (не на само окно)
+    function closeDialogOnOverlay(e) {
+      if (e.target === document.getElementById('contact-dialog')) {
+        closeDialog();
+      }
+    }
+
+    /* ── Горячие клавиши ── */
+    document.addEventListener('keydown', function (e) {
+      // C — открыть/закрыть контакты (если не в поле ввода)
+      if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        var tag = document.activeElement.tagName;
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+          var d = document.getElementById('contact-dialog');
+          d.classList.contains('open') ? closeDialog() : openDialog();
+        }
+      }
+      // Escape — закрыть диалог
+      if (e.key === 'Escape') closeDialog();
+    });
+
+    /* Инициализация иконок при загрузке страницы */
+    updateThemeIcons();
+  </script>
+
+</body>
+</html>
