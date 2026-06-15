@@ -748,44 +748,6 @@
 
     .dialog-close:hover { background-color: var(--primary-5); }
 
-    /* ================================================
-       CTA-БЛОК: картинка + кнопка «Начать»
-       ================================================ */
-
-    .cta-block {
-      margin-top: 3rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--primary-10);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .cta-image {
-      width: 100%;
-      border-radius: 12px;
-      display: block;
-      transition: opacity 0.15s ease;
-    }
-
-    .cta-image:hover { opacity: 0.88; }
-
-    .cta-btn {
-      display: block;
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background-color: var(--primary);
-      color: var(--background);
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      text-align: center;
-      text-decoration: none;
-      transition: opacity 0.15s ease;
-    }
-
-    .cta-btn:hover { opacity: 0.82; }
   </style>
 </head>
 <body>
@@ -1119,16 +1081,25 @@
           </div>
           </div>
 
-        </div>
+          <!-- ══ CTA: НАШ С ТОБОЙ ПРОЕКТ ══════════════════════════════ -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-inner">
+              <div class="portfolio-media">
+                <a href="https://t.me/AlexandrYaroslavtsev" target="_blank" rel="noopener noreferrer">
+                  <img src="images/cta.png" alt="Наш с тобой проект">
+                </a>
+              </div>
+              <div class="portfolio-story">
+                <div class="card-header">
+                  <h3 class="product-name">Наш с тобой проект</h3>
+                </div>
+                <a class="project-link" href="https://t.me/AlexandrYaroslavtsev" target="_blank" rel="noopener noreferrer">
+                  Начать →
+                </a>
+              </div>
+            </div>
+          </div>
 
-        <!-- CTA: наш с тобой проект -->
-        <div class="cta-block">
-          <a href="https://t.me/AlexandrYaroslavtsev" target="_blank" rel="noopener noreferrer">
-            <img src="images/cta.png" alt="Наш с тобой проект" class="cta-image">
-          </a>
-          <a class="cta-btn" href="https://t.me/AlexandrYaroslavtsev" target="_blank" rel="noopener noreferrer">
-            Начать
-          </a>
         </div>
 
       </section>
